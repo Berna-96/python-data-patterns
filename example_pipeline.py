@@ -6,7 +6,7 @@ from validation_rules.validate_age import validate_age
 from validation_rules.validate_salary import validate_salary
 from validation_rules.validate_department import validate_department
 from logging.file_logger import write_log
-
+from missing_values.handle_missing import handle_missing
 
 with open("config_examples/config.json") as f:
     config = json.load(f)
@@ -19,6 +19,7 @@ df = convert_numeric(df)
 df = validate_age(df, config)
 df = validate_salary(df, config)
 df = validate_department(df, config)
+df = handle_missing(df, strategy="mean")
 
 write_log("INFO", "Pipeline completed")
 
